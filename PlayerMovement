@@ -1,0 +1,40 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class PlayerMovement : MonoBehaviour
+{
+
+    public float Walk_Mod; 
+
+    void FixedUpdate () {
+
+        if (Input.GetKey(KeyCode.LeftShift)) {
+            Walk_Mod = 2;
+        }
+        else {
+            Walk_Mod = 1;
+        }
+        
+        if (Input.GetKey("w")) {
+            transform.Translate(0 ,0 , -10 * Time.deltaTime * Walk_Mod);
+        }
+
+        if (Input.GetKey("s")) {
+            transform.Translate(0 ,0 , 10 * Time.deltaTime * Walk_Mod);
+        }
+
+        if (Input.GetKey("a")) {
+            transform.Translate(10 * Time.deltaTime * Walk_Mod, 0 ,0);
+        }
+
+        if (Input.GetKey("d")) {
+            transform.Translate(-10 * Time.deltaTime * Walk_Mod, 0, 0);
+        }
+
+        if (Input.GetKeyDown(KeyCode.Space)) {
+            GetComponent<Rigidbody>().velocity = (Vector2.up) * 5;
+        }
+
+    }
+}
