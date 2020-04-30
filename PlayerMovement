@@ -5,7 +5,9 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
 
-    public float Walk_Mod; 
+    public float Walk_Mod;
+    public float Speed = 10;
+    public float JumpSpeed = 5;
 
     void FixedUpdate () {
 
@@ -17,23 +19,23 @@ public class PlayerMovement : MonoBehaviour
         }
         
         if (Input.GetKey("w")) {
-            transform.Translate(0 ,0 , -10 * Time.deltaTime * Walk_Mod);
+            transform.Translate(0 ,0 , Speed * Time.deltaTime * Walk_Mod);
         }
 
         if (Input.GetKey("s")) {
-            transform.Translate(0 ,0 , 10 * Time.deltaTime * Walk_Mod);
+            transform.Translate(0 ,0 , Speed * -1 * Time.deltaTime * Walk_Mod);
         }
 
         if (Input.GetKey("a")) {
-            transform.Translate(10 * Time.deltaTime * Walk_Mod, 0 ,0);
+            transform.Translate(-1 * Speed * Time.deltaTime * Walk_Mod, 0 ,0);
         }
 
         if (Input.GetKey("d")) {
-            transform.Translate(-10 * Time.deltaTime * Walk_Mod, 0, 0);
+            transform.Translate(Speed * Time.deltaTime * Walk_Mod, 0, 0);
         }
 
         if (Input.GetKeyDown(KeyCode.Space)) {
-            GetComponent<Rigidbody>().velocity = (Vector2.up) * 5;
+            GetComponent<Rigidbody>().velocity = (Vector2.up) * JumpSpeed;
         }
 
     }
