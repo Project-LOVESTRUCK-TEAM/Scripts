@@ -7,15 +7,12 @@ public class PlayerMovement : MonoBehaviour
     private Rigidbody rbody;
     public bool onair;
     public float Walk_Mod;
-    public float Speed = 10;
-    public float JumpSpeed = 5;
+    public float Speed;
 
     void Start () {
-        rbody = gameObject.GetComponent<Rigidbody>();
-        onair = false;
     }
 
-    void Update () {
+    void FixedUpdate () {
 
         if (Input.GetKey(KeyCode.LeftShift)) {
             Walk_Mod = 2;
@@ -40,22 +37,11 @@ public class PlayerMovement : MonoBehaviour
             transform.Translate(Speed * Time.deltaTime * Walk_Mod, 0, 0);
         }
 
-        if (Input.GetKeyDown(KeyCode.Space) && (onair == false)) {
-            GetComponent<Rigidbody>().velocity = (Vector2.up) * JumpSpeed;
-            onair = true;
-        }
     }
 
-    void OnCollisionEnter (Collision col1) {
-        if (col1.gameObject.name == "Wall") {
+    void OnCollisionEnter (Collision col) {
+        if (col.gameObject.name == "Wall") {
             rbody.velocity = Vector3.zero;
-            rbody.Sleep();
-        }
-    }
-
-    void OnCollisionEnter (Collision col2) {
-        if (col2.gameObject.name == "Ground") {
-            onair = false;
         }
     }
 }
